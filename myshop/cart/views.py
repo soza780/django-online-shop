@@ -3,6 +3,7 @@ from .forms import CartAddForm
 from .cart import Cart
 from django.views.decorators.http import require_POST
 from shop.models import Product
+from coupons.forms import CouponApplyForm
 
 
 # Create your views here.
@@ -32,4 +33,6 @@ def cart_detail(request):
         item['update_quantity_form'] = CartAddForm(initial={
             'quantity': item['quantity'],
             'override': True})
-    return render(request, 'cart/detail.html', {'cart': cart})
+    coupon_apply_form = CouponApplyForm()
+
+    return render(request, 'cart/detail.html', {'cart': cart, 'coupon_apply_form': coupon_apply_form})
